@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        /* css vars */
+        
+         :root {
+            --size: 7vmin;
+            --space: calc(var(--size));
+            --w: calc(var(--size) + var(--space));
+            --length: .8s;
+        }
+        
+        body {
+            margin: 0;
+        }
+        
+        .scene {
+            width: var(--size);
+            height: var(--size);
+            perspective: 100vmin;
+            transform-style: preserve-3d;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .plane {
+            height: calc((var(--size) * 3 + var(--space) * 2)*1);
+            width: calc((var(--size) * 3 + var(--space) * 2)*1);
+            transform-style: preserve-3d;
+            transform: rotateX(-40deg) rotateY(-45deg) rotateX(90deg);
+            background-color: #00ff00;
+            position: relative;
+            padding: var(--w);
+        }
+        
+        .cube {
+            width: var(--size);
+            height: var(--size);
+            position: absolute;
+            transform-style: preserve-3d;
+            transform: translate3d(calc(var(--x) + var(--size) + var(--space)), var(--y), calc(var(--size) / 2));
+            animation: cube var(--length) var(--d, 0) infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cube .shadow {
+            width: var(--size);
+            height: var(--size);
+            background: radial-gradient(black, transparent);
+            opacity: 1;
+            transform: translateZ(calc(-.5 * var(--size)));
+            animation: shadow var(--length) var(--d, 0) infinite;
+        }
+        
+        .cube[num="1"] {
+            --x: calc(var(--w) * 2);
+            --y: var(--w);
+            --d: calc(var(--length) / 8 * -1 * 0);
+        }
+        
+        .cube[num="2"] {
+            --x: calc(var(--w) * 2);
+            --y: calc(var(--w) * 2);
+            --d: calc(var(--length) / 8 * -1 * 1);
+        }
+        
+        .cube[num="3"] {
+            --x: var(--w);
+            --y: calc(var(--w) * 2);
+            --d: calc(var(--length) / 8 * -1 * 2);
+        }
+        
+        .cube[num="4"] {
+            --x: 0;
+            --y: calc(var(--w) * 2);
+            --d: calc(var(--length) / 8 * -1 * 3);
+        }
+        
+        .cube[num="5"] {
+            --x: 0;
+            --y: var(--w);
+            --d: calc(var(--length) / 8 * -1 * 4);
+        }
+        
+        .cube[num="6"] {
+            --x: 0;
+            --y: 0;
+            --d: calc(var(--length) / 8 * -1 * 5);
+        }
+        
+        .cube[num="7"] {
+            --x: var(--w);
+            --y: 0;
+            --d: calc(var(--length) / 8 * -1 * 6);
+        }
+        
+        .cube[num="8"] {
+            --x: calc(var(--w) * 2);
+            --y: 0;
+            --d: calc(var(--length) / 8 * -1 * 7);
+        }
+        
+        @keyframes cube {
+            0%,
+            30%,
+            100% {
+                transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
+            }
+            15% {
+                transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+            }
+        }
+        
+        @keyframes shadow {
+            0%,
+            30%,
+            100% {
+                transform: translateZ(calc(-.5 * var(--size)));
+                width: var(--size);
+                height: var(--size);
+                opacity: 1;
+            }
+            15% {
+                transform: translateZ(calc(var(--size) * -1.5));
+                width: calc(var(--size) * .85);
+                height: calc(var(--size) * .85);
+                opacity: .2;
+            }
+        }
+        
+        .cube-face {
+            position: absolute;
+            width: var(--size);
+            height: var(--size);
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            background-color: transparent;
+        }
+        
+        .cube-face[num="1"] {
+            transform: rotateY(0deg) translateZ(calc(var(--size) / 2));
+            background-color: rgb(0, 144, 144);
+        }
+        
+        .cube-face[num="2"] {
+            transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+            background-color: rgb(0, 255, 255);
+        }
+        
+        .cube-face[num="3"] {
+            transform: rotateY(180deg) translateZ(calc(var(--size) / 2));
+        }
+        
+        .cube-face[num="4"] {
+            transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+        }
+        
+        .cube-face[num="5"] {
+            transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+        }
+        
+        .cube-face[num="6"] {
+            transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+            background-color: rgb(4, 195, 195);
+        }
+    </style>
+	<title>Loading cubes pure css </title>
+</head>
+
+<body>
+    <div class="scene">
+        <div class="plane">
+            <div class="container">
+                <div class="cube" num="1">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+
+                <div class="cube" num="2">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="3">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="4">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="5">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="6">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="7">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <div class="cube" num="8">
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                <!--
+                <div class="cube center" style='--x: var(--w), --y: var(--w); --d: 100s'>
+                    <div class="cube-face" num="1"></div>
+                    <div class="cube-face" num="2"></div>
+                    <div class="cube-face" num="3"></div>
+                    <div class="cube-face" num="4"></div>
+                    <div class="cube-face" num="5"></div>
+                    <div class="cube-face" num="6"></div>
+                    <div class="shadow"></div>
+                </div>
+                -->
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
