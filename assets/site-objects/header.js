@@ -31,3 +31,4 @@ const content = `<style>
 `
 const div = document.body.appendChild(document.createElement('div'));
 div.innerHTML = content;
+div.id = 'header';
