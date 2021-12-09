@@ -124,3 +124,5 @@ class Vector {
             }
         }
 }
+
+window.Lightning = Lightning
