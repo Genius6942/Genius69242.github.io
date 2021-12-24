@@ -5,7 +5,7 @@
     <style>
         /* css vars */
         
-         :root {
+          :root {
             --size: 7vmin;
             --space: calc(var(--size));
             --w: calc(var(--size) + var(--space));
@@ -19,21 +19,31 @@
         .scene {
             width: var(--size);
             height: var(--size);
-            perspective: 100vmin;
-            transform-style: preserve-3d;
+            -webkit-perspective: 100vmin;
+                    perspective: 100vmin;
+            -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
             width: 100vw;
             height: 100vh;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
             position: relative;
         }
         
         .plane {
             height: calc((var(--size) * 3 + var(--space) * 2)*1);
             width: calc((var(--size) * 3 + var(--space) * 2)*1);
-            transform-style: preserve-3d;
-            transform: rotateX(-40deg) rotateY(-45deg) rotateX(90deg);
+            -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+            -webkit-transform: rotateX(-40deg) rotateY(-45deg) rotateX(90deg);
+                    transform: rotateX(-40deg) rotateY(-45deg) rotateX(90deg);
             background-color: #00ff00;
             position: relative;
             padding: var(--w);
@@ -43,21 +53,33 @@
             width: var(--size);
             height: var(--size);
             position: absolute;
-            transform-style: preserve-3d;
-            transform: translate3d(calc(var(--x) + var(--size) + var(--space)), var(--y), calc(var(--size) / 2));
-            animation: cube var(--length) var(--d, 0) infinite;
+            -webkit-transform-style: preserve-3d;
+                    transform-style: preserve-3d;
+            -webkit-transform: translate3d(calc(var(--x) + var(--size) + var(--space)), var(--y), calc(var(--size) / 2));
+                    transform: translate3d(calc(var(--x) + var(--size) + var(--space)), var(--y), calc(var(--size) / 2));
+            -webkit-animation: cube var(--length) var(--d, 0) infinite;
+                    animation: cube var(--length) var(--d, 0) infinite;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
         }
         
         .cube .shadow {
             width: var(--size);
             height: var(--size);
+            background: -o-radial-gradient(black, transparent);
             background: radial-gradient(black, transparent);
             opacity: 1;
-            transform: translateZ(calc(-.5 * var(--size)));
-            animation: shadow var(--length) var(--d, 0) infinite;
+            -webkit-transform: translateZ(calc(-.5 * var(--size)));
+                    transform: translateZ(calc(-.5 * var(--size)));
+            -webkit-animation: shadow var(--length) var(--d, 0) infinite;
+                    animation: shadow var(--length) var(--d, 0) infinite;
         }
         
         .cube[num="1"] {
@@ -108,14 +130,48 @@
             --d: calc(var(--length) / 8 * -1 * 7);
         }
         
+        @-webkit-keyframes cube {
+            0%,
+            30%,
+            100% {
+                -webkit-transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
+                        transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
+            }
+            15% {
+                -webkit-transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+                        transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+            }
+        }
+        
         @keyframes cube {
             0%,
             30%,
             100% {
-                transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
+                -webkit-transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
+                        transform: translate3d(var(--x), var(--y), calc(var(--size) / 2));
             }
             15% {
-                transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+                -webkit-transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+                        transform: translate3d(var(--x), var(--y), calc(var(--size) * 1.5));
+            }
+        }
+        
+        @-webkit-keyframes shadow {
+            0%,
+            30%,
+            100% {
+                -webkit-transform: translateZ(calc(-.5 * var(--size)));
+                        transform: translateZ(calc(-.5 * var(--size)));
+                width: var(--size);
+                height: var(--size);
+                opacity: 1;
+            }
+            15% {
+                -webkit-transform: translateZ(calc(var(--size) * -1.5));
+                        transform: translateZ(calc(var(--size) * -1.5));
+                width: calc(var(--size) * .85);
+                height: calc(var(--size) * .85);
+                opacity: .2;
             }
         }
         
@@ -123,13 +179,15 @@
             0%,
             30%,
             100% {
-                transform: translateZ(calc(-.5 * var(--size)));
+                -webkit-transform: translateZ(calc(-.5 * var(--size)));
+                        transform: translateZ(calc(-.5 * var(--size)));
                 width: var(--size);
                 height: var(--size);
                 opacity: 1;
             }
             15% {
-                transform: translateZ(calc(var(--size) * -1.5));
+                -webkit-transform: translateZ(calc(var(--size) * -1.5));
+                        transform: translateZ(calc(var(--size) * -1.5));
                 width: calc(var(--size) * .85);
                 height: calc(var(--size) * .85);
                 opacity: .2;
@@ -147,29 +205,35 @@
         }
         
         .cube-face[num="1"] {
-            transform: rotateY(0deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateY(0deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateY(0deg) translateZ(calc(var(--size) / 2));
             background-color: rgb(0, 144, 144);
         }
         
         .cube-face[num="2"] {
-            transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateY(90deg) translateZ(calc(var(--size) / 2));
             background-color: rgb(0, 255, 255);
         }
         
         .cube-face[num="3"] {
-            transform: rotateY(180deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateY(180deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateY(180deg) translateZ(calc(var(--size) / 2));
         }
         
         .cube-face[num="4"] {
-            transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateY(-90deg) translateZ(calc(var(--size) / 2));
         }
         
         .cube-face[num="5"] {
-            transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateX(90deg) translateZ(calc(var(--size) / 2));
         }
         
         .cube-face[num="6"] {
-            transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+            -webkit-transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
+                    transform: rotateX(-90deg) translateZ(calc(var(--size) / 2));
             background-color: rgb(4, 195, 195);
         }
     </style>
